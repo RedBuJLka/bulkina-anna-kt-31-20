@@ -32,5 +32,13 @@ namespace BulkinaAnnaKT_31_20.Controllers
             .ToArray();
         }
 
+        [HttpPost(Name = "AddNewSummary")]
+        public string[] AddNewSummary(string newSummary) {
+            _logger.LogError("Method was called!");
+            var list = Summaries.ToList();
+            list.Add(newSummary);
+            return list.ToArray();
+        }
+
     }
 }
