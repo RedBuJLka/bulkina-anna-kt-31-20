@@ -1,5 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
+using BulkinaAnnaKT_31_20.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,7 @@ var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentCla
 
 try
 {
+    
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
 
@@ -15,6 +18,9 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    builder.Services.AddDbContext<StudentDbContext>(options =>
+        options.UseSqlServer(connectionString));
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
