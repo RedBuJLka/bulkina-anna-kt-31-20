@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
 using BulkinaAnnaKT_31_20.Database;
+using BulkinaAnnaKT_31_20.ServiceExtenstions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +22,8 @@ try
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
     builder.Services.AddDbContext<StudentDbContext>(options =>
         options.UseSqlServer(connectionString));
+    builder.Services.AddServices();
     var app = builder.Build();
-
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
