@@ -3,6 +3,7 @@ using NLog;
 using NLog.Web;
 using BulkinaAnnaKT_31_20.Database;
 using BulkinaAnnaKT_31_20.ServiceExtenstions;
+using BulkinaAnnaKT_31_20.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,7 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+    app.UseMiddleware<ExceptionHandlerMiddleware>();
 
     app.UseAuthorization();
 
