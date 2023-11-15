@@ -8,7 +8,7 @@ namespace BulkinaAnnaKT_31_20.Models
         public string GroupName { get; set; }
 
         public bool IsValidGroupName() {
-            return Regex.Match(GroupName, @"/\D*-\d*-\d\d/g").Success;
+            return Regex.Match(GroupName, @"\D\D*-\d\d*-\d\d").Success;
         }
     }
 }

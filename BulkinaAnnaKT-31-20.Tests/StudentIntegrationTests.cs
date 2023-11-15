@@ -30,11 +30,11 @@ namespace BulkinaAnnaKT_31_20.Tests
             {
                 new Group
                 {
-                    GroupName = "KT-31-20"
+                    GroupName = "КТ-31-20"
                 },
                 new Group
                 {
-                    GroupName = "KT-41-20"
+                    GroupName = "КТ-41-20"
                 }
             };
             await ctx.Set<Group>().AddRangeAsync(groups);
@@ -61,7 +61,15 @@ namespace BulkinaAnnaKT_31_20.Tests
                     Surname = "asdf3",
                     Patronym = "zxc3",
                     GroupId = 1,
+                },
+                new Student
+                {
+                    Name = "qwerty4",
+                    Surname = "asdf4",
+                    Patronym = "zxc4",
+                    GroupId = 1,
                 }
+
             };
             await ctx.Set<Student>().AddRangeAsync(students);
 
@@ -70,12 +78,12 @@ namespace BulkinaAnnaKT_31_20.Tests
             // Act
             var filter = new Filters.StudentFilters.StudentGroupFilter
             {
-                GroupName = "KT-31-20"
+                GroupName = "КТ-41-20"
             };
             var studentsResult = await studentService.GetStudentsByGroupAsync(filter, CancellationToken.None);
 
             // Assert
-            Assert.Equal(2, studentsResult.Length);
+            Assert.Equal(1, studentsResult.Length);
 
 
         }
